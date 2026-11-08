@@ -1,0 +1,161 @@
+# ============================================================
+#  Floor Is Lava - configuración
+#  Los colores usan el formato &a, &c, etc.
+# ============================================================
+
+# Segundos entre cada subida de lava para cada preset de velocidad.
+# CUSTOM usa el intervalo propio de cada arena (se cambia desde la GUI).
+speed:
+  LENTA: 20.0
+  NORMAL: 10.0
+  RAPIDA: 5.0
+
+# Dificultad: segundos de gracia antes de que empiece la lava
+# y número de capas que sube la lava en cada paso.
+difficulty:
+  FACIL:
+    grace-seconds: 30
+    layers-per-step: 1
+  NORMAL:
+    grace-seconds: 15
+    layers-per-step: 1
+  DIFICIL:
+    grace-seconds: 5
+    layers-per-step: 2
+
+lava:
+  # Si el TPS del servidor baja de este valor, la lava no añade capas nuevas
+  # hasta que se recupere. Por encima, la velocidad se ajusta de forma dinámica.
+  tps-pause-below: 15.0
+
+restore:
+  # instant  = restaura todo de golpe
+  # gradual  = restaura por tandas (anti-lag)
+  mode: gradual
+  blocks-per-tick: 2500
+
+end:
+  # Segundos que se muestra el TOP 3 / holograma antes de devolver a los jugadores
+  delay-seconds: 10
+
+border:
+  # Muestra un WorldBorder visual (solo para los jugadores de la partida)
+  visual: true
+
+gui:
+  title: "&6&lFloor Is Lava &8- &7Configuración"
+
+sounds:
+  enabled: true
+  events:
+    countdown:
+      enabled: true
+      sound: BLOCK_NOTE_BLOCK_HAT
+      volume: 1.0
+      pitch: 1.0
+    start:
+      enabled: true
+      sound: ENTITY_ENDER_DRAGON_GROWL
+      volume: 0.6
+      pitch: 1.0
+    lava-rise:
+      enabled: true
+      sound: ITEM_BUCKET_EMPTY_LAVA
+      volume: 0.4
+      pitch: 0.8
+    elimination:
+      enabled: true
+      sound: ENTITY_LIGHTNING_BOLT_THUNDER
+      volume: 0.7
+      pitch: 1.0
+    win:
+      enabled: true
+      sound: UI_TOAST_CHALLENGE_COMPLETE
+      volume: 1.0
+      pitch: 1.0
+
+titles:
+  countdown:
+    enabled: true
+    title: "&e{seconds}"
+    subtitle: "&7La lava se acerca..."
+    fade-in: 0
+    stay: 15
+    fade-out: 5
+  start:
+    enabled: true
+    title: "&c&l¡LA LAVA SUBE!"
+    subtitle: "&7Sobrevive el mayor tiempo posible"
+    fade-in: 5
+    stay: 40
+    fade-out: 10
+  elimination:
+    enabled: true
+    title: "&c&lELIMINADO"
+    subtitle: "&7Quedaste en el puesto #{place}"
+    fade-in: 5
+    stay: 50
+    fade-out: 10
+  win:
+    enabled: true
+    title: "&6&l¡VICTORIA!"
+    subtitle: "&7Eres el último en pie"
+    fade-in: 5
+    stay: 80
+    fade-out: 20
+
+messages:
+  prefix: "&8[&6FloorIsLava&8] &7"
+  no-permission: "&cNo tienes permiso para hacer eso."
+  player-only: "&cEste comando solo puede usarlo un jugador."
+  unknown-subcommand: "&cSubcomando desconocido. Usa &e/fil help&c."
+  no-arena: "&cNo hay ninguna arena seleccionada. Usa &e/fil arena create <nombre>&c."
+  arena-not-found: "&cLa arena &e{arena}&c no existe."
+  arena-exists: "&cYa existe una arena llamada &e{arena}&c."
+  arena-created: "&aArena &e{arena}&a creada en tu posición (radio {radius})."
+  arena-deleted: "&aArena &e{arena}&a eliminada."
+  arena-selected: "&aArena seleccionada: &e{arena}&a."
+  arena-updated: "&aArena &e{arena}&a actualizada."
+  arena-busy: "&cLa arena está en uso, no se puede modificar ahora."
+  arena-info: "&e{arena} &7| mundo &f{world} &7| centro &f{x} {y} {z} &7| radio &f{radius} &7| lava Y &f{starty} &7| velocidad &f{speed} &7| dificultad &f{difficulty} &7| test &f{test}"
+  arena-list: "&7Arenas: &f{arenas}"
+  invalid-number: "&cNúmero no válido."
+  invalid-name: "&cNombre no válido (usa letras, números, - y _, máximo 32)."
+  joined: "&aTe uniste a &e{arena}&a. Jugadores: &f{players}"
+  left: "&7Saliste de la partida."
+  not-joined: "&cNo estás en ninguna partida."
+  already-joined: "&cYa estás en una partida."
+  game-running: "&cLa partida ya está en marcha, espera a que termine."
+  game-already-running: "&cEsa arena ya tiene una partida en curso."
+  game-not-running: "&cNo hay ninguna partida en curso en esa arena."
+  world-missing: "&cEl mundo de la arena no está cargado."
+  no-players: "&cNo hay jugadores apuntados. Usa &e/fil join&c."
+  not-enough-players: "&cHacen falta al menos 2 jugadores (o activa el modo test)."
+  started: "&aPartida iniciada en &e{arena}&a."
+  stopped: "&aPartida detenida en &e{arena}&a."
+  game-starting: "&eLa partida empieza en &c{seconds}&e segundos. ¡Prepárate!"
+  lava-start: "&c&l¡La lava empieza a subir!"
+  eliminated-broadcast: "&c{player} &7ha sido eliminado. Quedan &f{alive}&7."
+  eliminated-quit: "&c{player} &7abandonó la partida. Quedan &f{alive}&7."
+  winner: "&6&l{player} &egana la partida!"
+  no-winner: "&7La partida terminó sin ganador."
+  top-header: "&6&l--- TOP 3 ---"
+  top-line: "&e#{place} &f{player}"
+  hologram-title: "&6&lTOP 3"
+  hologram-line: "&e#{place} &f{player}"
+  actionbar: "&c🔥 Lava Y: &f{lava_y} &8| &aVivos: &f{alive}"
+  border-blocked: "&cNo puedes salir del área de juego."
+  restore-done: "&aÁrea restaurada."
+  nothing-to-restore: "&7No hay nada que restaurar."
+  test-on: "&aModo test activado en &e{arena}&a (lava sin daño, sin snapshot)."
+  test-off: "&7Modo test desactivado en &e{arena}&7."
+  reloaded: "&aConfiguración recargada."
+  help:
+    - "&6&lFloor Is Lava &7- comandos"
+    - "&e/fil setup &7- abre la GUI de configuración"
+    - "&e/fil join [arena] &7/ &e/fil leave &7- entrar / salir"
+    - "&e/fil start [arena] &7/ &e/fil stop [arena]"
+    - "&e/fil arena <create|delete|list|select|info|setcenter|setradius|setstarty> ..."
+    - "&e/fil test [on|off] &7- modo test de la arena seleccionada"
+    - "&e/fil restore [arena] &7- restaura el área al instante"
+    - "&e/fil reload &7- recarga config.yml"
