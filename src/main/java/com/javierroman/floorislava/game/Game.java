@@ -343,12 +343,37 @@ public class Game {
         plugin.effects().sound(onlinePlayers(), "lava-rise");
     }
 
+    private static java.lang.reflect.Method tpsMethod;
+    private static Object tpsTarget;
+    private static boolean tpsResolved;
+
+    /** TPS del último minuto. getTPS() no está en la API de Spigot, así que se busca por reflexión. */
     private static double currentTps() {
         try {
-            return Math.min(20.0, Bukkit.getServer().spigot().getTPS()[0]);
-        } catch (Throwable t) {
-            return 20.0;
+            if (!tpsResolved) {
+                tpsResolved = true;
+                Object server = Bukkit.getServer();
+                Object[] candidates = {server, Bukkit.getServer().spigot()};
+                for (Object target : candidates) {
+                    try {
+                        java.lang.reflect.Method m = target.getClass().getMethod("getTPS");
+                        m.setAccessible(true);
+                        tpsMethod = m;
+                        tpsTarget = target;
+                        break;
+                    } catch (ReflectiveOperationException | RuntimeException ignored) {
+                        // probar el siguiente candidato
+                    }
+                }
+            }
+            if (tpsMethod != null) {
+                double[] tps = (double[]) tpsMethod.invoke(tpsTarget);
+                if (tps != null && tps.length > 0) return Math.min(20.0, tps[0]);
+            }
+        } catch (Throwable ignored) {
+            // sin TPS disponible: se asume servidor sano
         }
+        return 20.0;
     }
 
     /** Bloques de lava que se pueden colocar por tick según el TPS actual. */
