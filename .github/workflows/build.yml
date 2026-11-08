@@ -19,7 +19,14 @@ jobs:
           cache: maven
 
       - name: Compilar
-        run: mvn -B clean package
+        run: |
+          set +e
+          mvn -B clean package 2>&1 | tee build.log
+          status=${PIPESTATUS[0]}
+          grep -E '^\[ERROR\]' build.log | head -40 | while IFS= read -r line; do
+            echo "::error::${line:0:900}"
+          done
+          exit $status
 
       - name: Subir el jar
         uses: actions/upload-artifact@v4
