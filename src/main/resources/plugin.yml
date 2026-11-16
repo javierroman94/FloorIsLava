@@ -1,0 +1,21 @@
+name: FloorIsLava
+version: '${project.version}'
+main: com.javierroman.floorislava.FloorIsLava
+api-version: '1.20'
+author: Javier Roman
+description: Minijuego Floor Is Lava - la lava sube y solo uno sobrevive
+softdepend: [PlaceholderAPI, TAB]
+
+commands:
+  floorislava:
+    description: Comando principal de Floor Is Lava
+    aliases: [fil, floorlava]
+    usage: /<command> help
+
+permissions:
+  floorislava.admin:
+    description: Gestionar arenas, iniciar/detener partidas y abrir la GUI
+    default: op
+  floorislava.play:
+    description: Unirse y salir de partidas
+    default: true
